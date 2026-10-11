@@ -25,8 +25,8 @@ hand-drawn ones have no checker. Nested and swimlane layouts are where hand draw
 
 ## What the model writes
 
-The output a model must write is the slowest part of drawing. For 14 diagrams that exist both as a hand-drawn
-show-me diagram and as an elbow view, this table compares the hand-drawn `<svg>` element with the view JSON as an
+The output a model must write is the slowest part of drawing. For 14 diagrams that exist both as a diagram an
+agent drew by hand with diagram-design and as an elbow view, this table compares the hand-drawn `<svg>` element with the view JSON as an
 agent writes it (without default fields). Tokens are counted with tiktoken `o200k_base` as an estimate.
 `elbow --best` is the median of 5 runs, including process start, on Windows x86_64.
 

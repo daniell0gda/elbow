@@ -33,7 +33,7 @@ Windows binary. Run every command from this repo's root.
 
 6. CI writes only a changelog link. Write the notes from the template below into a scratch file and set them:
    `rtk gh release edit vX.Y.Z --notes-file <file>`.
-7. Reinstall the local binary that other tools (such as the show-me skill) use. It needs `vcvars64`, like
+7. Reinstall the local binary that other tools on this machine use. It needs `vcvars64`, like
    `test-build.ps1`: `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked --force`.
 
 ## Rules
