@@ -1,0 +1,51 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+env:
+  RESVG_VERSION: 0.48.1
+
+jobs:
+  linux-x86_64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test
+        run: cargo test --release --locked
+
+      - name: Build
+        run: cargo build --release --locked
+
+      - name: Package elbow
+        run: |
+          name="elbow-${GITHUB_REF_NAME}-x86_64-unknown-linux-gnu"
+          mkdir "$name"
+          cp target/release/elbow README.md LICENSE "$name"/
+          chmod 755 "$name/elbow"
+          tar -czf "$name.tar.gz" "$name"
+          echo "ARCHIVE=$name.tar.gz" >> "$GITHUB_ENV"
+
+      - name: Fetch resvg
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download "v${RESVG_VERSION}" --repo linebender/resvg --pattern resvg-linux-x86_64.tar.gz
+          mv resvg-linux-x86_64.tar.gz "resvg-v${RESVG_VERSION}-linux-x86_64.tar.gz"
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "elbow $GITHUB_REF_NAME" \
+            --generate-notes \
+            "$ARCHIVE" \
+            "resvg-v${RESVG_VERSION}-linux-x86_64.tar.gz"
