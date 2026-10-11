@@ -49,3 +49,31 @@ jobs:
             --generate-notes \
             "$ARCHIVE" \
             "resvg-v${RESVG_VERSION}-linux-x86_64.tar.gz"
+
+  windows-x86_64:
+    needs: linux-x86_64
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test
+        run: cargo test --release --locked
+
+      - name: Build
+        run: cargo build --release --locked
+
+      - name: Package elbow
+        run: |
+          $name = "elbow-$env:GITHUB_REF_NAME-x86_64-pc-windows-msvc"
+          New-Item -ItemType Directory $name | Out-Null
+          Copy-Item target/release/elbow.exe, README.md, LICENSE $name
+          Compress-Archive -Path $name -DestinationPath "$name.zip"
+          "ARCHIVE=$name.zip" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: Upload to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$env:GITHUB_REF_NAME" "$env:ARCHIVE" --repo "$env:GITHUB_REPOSITORY"

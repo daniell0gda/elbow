@@ -12,9 +12,11 @@ SVG yourself: change the view and render again.
 
 `elbow` must be on PATH; running it with no arguments prints its usage. To install it:
 
-- Linux x86_64: download `elbow-vX.Y.Z-x86_64-unknown-linux-gnu.tar.gz` from
-  https://github.com/daniell0gda/elbow/releases and put `elbow` on PATH.
-- Any OS with Rust: `cargo install --git https://github.com/daniell0gda/elbow --locked`
+- Windows x86_64: download `elbow-vX.Y.Z-x86_64-pc-windows-msvc.zip` from
+  https://github.com/daniell0gda/elbow/releases and put `elbow.exe` in a folder on PATH.
+- Linux x86_64: download `elbow-vX.Y.Z-x86_64-unknown-linux-gnu.tar.gz` from the same page and put `elbow` on
+  PATH.
+- Any other OS, with Rust: `cargo install --git https://github.com/daniell0gda/elbow --locked`
   (on Windows, run it in a Visual Studio Build Tools environment).
 
 ## Workflow

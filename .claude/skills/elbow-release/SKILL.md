@@ -7,7 +7,8 @@ description: Releases elbow - moves the commits from transcript-app\elbow (where
 
 elbow is developed in the `elbow\` folder of transcript-app, by default the sibling folder `..\transcript-app`.
 This repo is the published copy: the same code plus `README.md`, `AGENTS.md`, `LICENSE`, `docs/previews/`,
-`skills/` (the `elbow-diagram` agent skill), `.claude/` and `.github/workflows/release.yml`. A `v*` tag makes CI test, build the Linux binary and create the GitHub release.
+`skills/` (the `elbow-diagram` agent skill), `.claude/` and `.github/workflows/release.yml`. A `v*` tag makes CI test, build the Linux binary, create the GitHub release, and
+then build and upload the Windows binary.
 
 Run every command from this repo's root.
 
@@ -76,10 +77,11 @@ another transcript-app clone.
 
 ## Assets
 
+- `elbow-vX.Y.Z-x86_64-pc-windows-msvc.zip`: the `elbow.exe` binary for Windows x86_64, with README and LICENSE.
 - `elbow-vX.Y.Z-x86_64-unknown-linux-gnu.tar.gz`: the `elbow` binary for Linux x86_64 (glibc), with README and LICENSE.
 - `resvg-v0.48.1-linux-x86_64.tar.gz`: the upstream resvg 0.48.1 binary for Linux x86_64, to rasterize elbow SVG output to PNG. Built by [linebender/resvg](https://github.com/linebender/resvg).
 
-On Windows or macOS, install from the tag: `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked`.
+On macOS, install from the tag: `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked`.
 
 ## Highlights
 
