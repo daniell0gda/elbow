@@ -11,6 +11,5 @@ folder.
 ## Working on elbow
 
 - Test with `cargo test --release`; every reference view in `tests/` must render without a rule violation.
-- The code is developed in the `elbow/` folder of a separate source repository and synced here, so do not
-  change `src/`, `tests/`, `examples/` or `Cargo.*` in this repo directly. This repo adds only the readme, the license, `bench/`, `docs/`, `skills/`, `.claude/` and the release workflow.
+- This repo is the only copy of elbow: make every change here.
 - Releases follow [.claude/skills/elbow-release/SKILL.md](.claude/skills/elbow-release/SKILL.md).
