@@ -91,6 +91,20 @@ measures (crossings, bends, unclear labels, area) to stderr.
 `direction` (`right`, `down`), `node_gap`, `min_channel`, `track_gap`, `uniform_rank_size`, `ordering_sweeps`,
 `theme` (`light`, `dark`), `legend`.
 
+## Benchmark
+
+Against an agent that draws the same diagram by hand with diagram-design ([details](docs/benchmark.md)):
+
+| | Hand-drawn | elbow |
+| --- | ---: | ---: |
+| Agent tokens, 4 diagrams | 318,079 | 197,033 (38% fewer) |
+| Agent time, 4 diagrams | 439 s | 91 s (4.8x faster) |
+| Model output, 14 diagrams | 53,880 tokens of SVG | 7,102 tokens of JSON (7.6x less) |
+| Render time | — | 16–41 ms per diagram with `--best` |
+
+Sequence and flow diagrams come out as clean as the hand-drawn ones; nested and swimlane layouts still have more
+crossings than a careful hand drawing.
+
 ## Use with an AI agent
 
 [`skills/elbow-diagram`](skills/elbow-diagram/SKILL.md) is an Agent Skill that teaches an agent to draw with
