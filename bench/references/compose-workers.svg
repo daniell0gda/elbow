@@ -1,0 +1,156 @@
+<svg viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="compose-workers-title compose-workers-desc">
+        <title id="compose-workers-title">Compose services and runner workers in one issue workspace</title>
+        <desc id="compose-workers-desc">Architecture showing the runner validating the repository's compose file, starting its services as a per-workspace compose project, and running agent commands in its own workers that share the project's network and mount the issue worktree.</desc>
+        <defs>
+          <marker id="cw-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/>
+          </marker>
+          <marker id="cw-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/>
+          </marker>
+          <marker id="cw-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/>
+          </marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- ZONES -->
+        <rect x="500" y="56" width="460" height="396" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <rect x="516" y="60" width="128" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="524" y="69" fill="rgba(45,49,66,0.40)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.14em">NETWORK &lt;WS&gt;_DEFAULT</text>
+
+        <rect x="516" y="96" width="428" height="112" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <rect x="524" y="100" width="204" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="532" y="109" fill="rgba(45,49,66,0.40)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.14em">COMPOSE PROJECT &lt;WS&gt; · REPO DECLARES</text>
+
+        <rect x="516" y="320" width="428" height="112" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <rect x="612" y="324" width="192" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="620" y="333" fill="rgba(45,49,66,0.40)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.14em">RUNNER WORKERS · RUN_PROJECT_CMD</text>
+
+        <!-- ARROWS -->
+        <!-- agent -> runner -->
+        <line x1="200" y1="300" x2="260" y2="300" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#cw-arrow-link)"/>
+        <!-- compose file -> runner (read + validate) -->
+        <line x1="350" y1="164" x2="350" y2="268" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#cw-arrow)"/>
+        <!-- runner -> compose project -->
+        <path d="M 440,289 H 460 Q 468,289 468,281 V 160 Q 468,152 476,152 H 516" fill="none" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#cw-arrow-accent)"/>
+        <!-- runner -> workers -->
+        <path d="M 440,311 H 476 Q 484,311 484,319 V 368 Q 484,376 492,376 H 516" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cw-arrow)"/>
+        <!-- api -> db -->
+        <line x1="700" y1="160" x2="760" y2="160" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cw-arrow)"/>
+        <!-- worker default -> api -->
+        <line x1="596" y1="352" x2="596" y2="192" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#cw-arrow-link)"/>
+        <!-- worker client.test -> api -->
+        <path d="M 820,352 V 276 Q 820,268 812,268 H 652 Q 644,268 644,260 V 192" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#cw-arrow-link)"/>
+        <!-- workers -> worktree -->
+        <line x1="620" y1="416" x2="620" y2="480" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#cw-arrow)"/>
+        <line x1="840" y1="416" x2="840" y2="480" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#cw-arrow)"/>
+        <!-- agent -> worktree -->
+        <path d="M 120,332 V 504 Q 120,512 128,512 H 580" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#cw-arrow)"/>
+
+        <!-- ARROW LABELS -->
+        <rect x="204" y="280" width="52" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="230" y="289" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">HTTP /RUN</text>
+
+        <rect x="358" y="210" width="52" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="384" y="219" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">VALIDATED</text>
+
+        <rect x="400" y="176" width="60" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="430" y="185" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">COMPOSE UP</text>
+
+        <rect x="412" y="344" width="64" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="444" y="353" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">DOCKER EXEC</text>
+
+        <rect x="716" y="140" width="28" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="730" y="149" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">SQL</text>
+
+        <rect x="688" y="248" width="88" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="732" y="257" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">TETRA-API:8080</text>
+
+        <rect x="560" y="456" width="52" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="586" y="465" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">MOUNT RW</text>
+
+        <rect x="332" y="492" width="36" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="350" y="501" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">EDITS</text>
+
+        <!-- NODES -->
+        <!-- Hermes agent -->
+        <rect x="40" y="268" width="160" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="40" y="268" width="160" height="64" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399" stroke-width="1"/>
+        <rect x="48" y="274" width="28" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
+        <text x="62" y="283" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGT</text>
+        <text x="120" y="302" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Hermes agent</text>
+        <text x="120" y="318" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">coder · checker</text>
+
+        <!-- Compose file -->
+        <rect x="260" y="100" width="180" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="260" y="100" width="180" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+        <rect x="268" y="106" width="32" height="12" rx="2" fill="transparent" stroke="rgba(79,93,117,0.40)" stroke-width="0.8"/>
+        <text x="284" y="115" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">FILE</text>
+        <text x="350" y="134" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Compose file</text>
+        <text x="350" y="150" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">.hermes/services.compose.yaml</text>
+
+        <!-- Runner (focal) -->
+        <rect x="260" y="268" width="180" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="260" y="268" width="180" height="64" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+        <rect x="268" y="274" width="28" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.50)" stroke-width="0.8"/>
+        <text x="282" y="283" fill="#eb6c36" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
+        <text x="350" y="302" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">app-container-runner</text>
+        <text x="350" y="318" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">only Docker access</text>
+
+        <!-- tetra-api -->
+        <rect x="540" y="128" width="160" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="540" y="128" width="160" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="548" y="134" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="562" y="143" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SVC</text>
+        <text x="620" y="162" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">tetra-api</text>
+        <text x="620" y="178" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">prebuilt image</text>
+
+        <!-- tetra-db -->
+        <rect x="760" y="128" width="160" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="128" width="160" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="768" y="134" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="782" y="143" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">SVC</text>
+        <text x="840" y="162" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">tetra-db</text>
+        <text x="840" y="178" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">postgres:16</text>
+
+        <!-- Worker default -->
+        <rect x="540" y="352" width="160" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="540" y="352" width="160" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="548" y="358" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="562" y="367" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">WKR</text>
+        <text x="620" y="386" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Worker · default</text>
+        <text x="620" y="402" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">npm test · ng serve</text>
+
+        <!-- Worker client.test -->
+        <rect x="760" y="352" width="160" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="760" y="352" width="160" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="768" y="358" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="782" y="367" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">WKR</text>
+        <text x="840" y="386" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Worker · client.test</text>
+        <text x="840" y="402" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">cypress run</text>
+
+        <!-- Issue worktree -->
+        <rect x="580" y="480" width="320" height="64" rx="6" fill="#f5f5f5"/>
+        <rect x="580" y="480" width="320" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+        <rect x="588" y="486" width="28" height="12" rx="2" fill="transparent" stroke="rgba(79,93,117,0.40)" stroke-width="0.8"/>
+        <text x="602" y="495" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">VOL</text>
+        <text x="740" y="514" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Issue worktree</text>
+        <text x="740" y="530" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">/opt/workspace · same path as Hermes</text>
+
+        <!-- LEGEND -->
+        <line x1="40" y1="572" x2="960" y2="572" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="40" y="590" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">LEGEND</text>
+        <rect x="40" y="600" width="16" height="12" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="0.8"/>
+        <text x="62" y="609" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Policy gate</text>
+        <line x1="148" y1="606" x2="176" y2="606" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#cw-arrow-accent)"/>
+        <text x="184" y="609" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Compose up (new)</text>
+        <line x1="288" y1="606" x2="316" y2="606" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#cw-arrow-link)"/>
+        <text x="324" y="609" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">HTTP</text>
+        <line x1="376" y1="606" x2="404" y2="606" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#cw-arrow)"/>
+        <text x="412" y="609" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Docker API · SQL</text>
+        <line x1="512" y1="606" x2="540" y2="606" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#cw-arrow)"/>
+        <text x="548" y="609" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">File read · mount</text>
+        <rect x="652" y="600" width="16" height="12" rx="2" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.20)" stroke-width="0.8"/>
+        <text x="674" y="609" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Network · scope</text>
+      </svg>

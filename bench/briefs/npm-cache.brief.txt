@@ -1,0 +1,25 @@
+Title: Where a worktree's node_modules comes from
+Draw it as a swimlane diagram.
+
+Elements (label, kind):
+- Read runtime (node -p …) (service)
+- Hash inputs (restore → key) (service)
+- npm ci (~27 s on k8s) (service)
+- Copy in (cp -a · 3.5 s) (service, highlight it)
+- Copy out (save · tmp+rename) (service)
+- Snapshot (<key>/ · 1.4 GB) (database)
+- Evict (>90 d · over cap) (database)
+
+Connections, in order (from -> to: label, kind):
+- Read runtime (node -p …) -> Hash inputs (restore → key): runtime, call
+- Hash inputs (restore → key) -> Copy in (cp -a · 3.5 s): hit, call
+- Hash inputs (restore → key) -> npm ci (~27 s on k8s): miss, call
+- npm ci (~27 s on k8s) -> Copy out (save · tmp+rename): exit 0, call
+- Snapshot (<key>/ · 1.4 GB) -> Copy in (cp -a · 3.5 s): read, call
+- Copy out (save · tmp+rename) -> Snapshot (<key>/ · 1.4 GB): write, call
+- Copy out (save · tmp+rename) -> Evict (>90 d · over cap): (no label), call
+
+Groups (label: members):
+- Worker (run_project_cmd): Read runtime (node -p …), npm ci (~27 s on k8s)
+- Hermes (npm_deps.py): Hash inputs (restore → key), Copy in (cp -a · 3.5 s), Copy out (save · tmp+rename)
+- Store (.node-modules/): Snapshot (<key>/ · 1.4 GB), Evict (>90 d · over cap)

@@ -48,5 +48,11 @@ agent writes it (without default fields). Tokens are counted with tiktoken `o200
 | skill-updates | swimlane | 3,396 | 547 | 6.2x | 17 |
 | **Total (14)** | | **53,880** | **7,102** | **7.6x** | median 23 |
 
-The views are in [`tests/`](../tests). The hand-drawn diagrams come from private show-me pages and are not
-published.
+The views are in [`tests/`](../tests).
+
+## Reproduce it
+
+[`bench/`](../bench) holds every input and output: the briefs and the exact agent prompts, the usage of each agent
+run, all eight results with a side-by-side screenshot, the 14 hand-drawn SVGs with the script that extracted them,
+and `static_bench.py`, which recomputes the second table (`pip install tiktoken`, then
+`python bench/static_bench.py`).

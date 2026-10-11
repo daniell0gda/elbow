@@ -1,0 +1,101 @@
+<svg viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="skill-updates-title skill-updates-desc">
+      <title id="skill-updates-title">How a skill change reaches Hermes</title>
+      <desc id="skill-updates-desc">Swimlane showing a shared-code change edited and synced into skill folders on our machine, pushed to the hermes-skills GitLab repo, downloaded only by the provision run into each profile's skills folder, and then run by the Hermes agent, which never downloads anything itself.</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+      <!-- Lane dividers -->
+      <line x1="40" y1="80" x2="968" y2="80" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <line x1="40" y1="176" x2="968" y2="176" stroke="rgba(45,49,66,0.10)" stroke-width="1"/>
+      <line x1="40" y1="272" x2="968" y2="272" stroke="rgba(45,49,66,0.10)" stroke-width="1"/>
+      <line x1="40" y1="368" x2="968" y2="368" stroke="rgba(45,49,66,0.10)" stroke-width="1"/>
+      <line x1="40" y1="464" x2="968" y2="464" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+      <line x1="180" y1="80" x2="180" y2="464" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+
+      <!-- Lane labels -->
+      <text x="48" y="124" fill="#2d3142" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.18em">OUR MACHINE</text>
+      <text x="48" y="138" fill="#7a8399" font-size="9" font-family="'Geist', sans-serif">before each commit</text>
+      <text x="48" y="220" fill="#2d3142" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.18em">GITLAB</text>
+      <text x="48" y="234" fill="#7a8399" font-size="9" font-family="'Geist', sans-serif">hermes-skills, public</text>
+      <text x="48" y="316" fill="#2d3142" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.18em">PROVISION</text>
+      <text x="48" y="330" fill="#7a8399" font-size="9" font-family="'Geist', sans-serif">server, one-shot, run by us</text>
+      <text x="48" y="412" fill="#2d3142" font-size="9" font-family="'Geist Mono', monospace" letter-spacing="0.18em">HERMES GATEWAY</text>
+      <text x="48" y="426" fill="#7a8399" font-size="9" font-family="'Geist', sans-serif">server, always running</text>
+
+      <!-- Lane notes -->
+      <text x="200" y="220" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">served as raw URLs, no login:</text>
+      <text x="200" y="234" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">…/-/raw/main/&lt;category&gt;/&lt;skill&gt;/…</text>
+      <text x="200" y="316" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">docker compose --profile provision</text>
+      <text x="200" y="330" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">  run --rm provision</text>
+      <text x="200" y="412" fill="#2d3142" font-size="14" font-style="italic" font-family="'Instrument Serif', serif">Never downloads anything.</text>
+      <text x="200" y="430" fill="#4f5d75" font-size="10" font-family="'Geist', sans-serif">Scripts import from caiq-issue-lib, installed next to them.</text>
+
+      <!-- Arrows (drawn first) -->
+      <line x1="488" y1="128" x2="520" y2="128" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="584" y1="152" x2="584" y2="200" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="584" y1="248" x2="584" y2="296" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <line x1="648" y1="320" x2="680" y2="320" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="744" y1="344" x2="744" y2="392" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <line x1="808" y1="416" x2="840" y2="416" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- Arrow labels -->
+      <rect x="592" y="170" width="36" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="610" y="179" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">PUSH</text>
+      <rect x="592" y="266" width="84" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="634" y="275" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">GET RAW FILES</text>
+      <rect x="752" y="362" width="40" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="772" y="371" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.06em">WRITE</text>
+
+      <!-- Our machine -->
+      <rect x="360" y="104" width="128" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="424" y="126" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Edit shared code</text>
+      <text x="424" y="140" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">caiq-issue-lib/scripts</text>
+
+      <rect x="520" y="104" width="128" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="584" y="126" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Commit + push</text>
+      <text x="584" y="140" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">one file, no copies</text>
+
+      <!-- GitLab -->
+      <rect x="520" y="200" width="128" height="48" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+      <text x="584" y="222" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">hermes-skills repo</text>
+      <text x="584" y="236" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">CI runs the tests</text>
+
+      <!-- Provision -->
+      <rect x="520" y="296" width="128" height="48" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+      <text x="584" y="318" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Install / update</text>
+      <text x="584" y="332" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">hermes skills update</text>
+
+      <rect x="680" y="296" width="128" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="744" y="318" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Compare each file</text>
+      <text x="744" y="332" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">reinstall on any diff</text>
+
+      <!-- Hermes gateway -->
+      <rect x="680" y="392" width="128" height="48" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+      <text x="744" y="414" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Profile skills</text>
+      <text x="744" y="428" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">profiles/&lt;p&gt;/skills/</text>
+
+      <rect x="840" y="392" width="128" height="48" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="904" y="414" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Agent runs script</text>
+      <text x="904" y="428" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">submit_issue.py</text>
+
+      <!-- Legend -->
+      <line x1="40" y1="488" x2="968" y2="488" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+      <text x="40" y="504" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+      <rect x="40" y="514" width="14" height="10" rx="2" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <text x="60" y="522" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Step</text>
+      <rect x="120" y="514" width="14" height="10" rx="2" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+      <text x="140" y="522" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">External repo</text>
+      <rect x="236" y="514" width="14" height="10" rx="2" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+      <text x="256" y="522" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Files on disk</text>
+      <rect x="352" y="514" width="14" height="10" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+      <text x="372" y="522" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Where Hermes downloads skills</text>
+      <line x1="528" y1="519" x2="556" y2="519" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#arrow)"/>
+      <text x="564" y="522" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Flow</text>
+      <line x1="624" y1="519" x2="652" y2="519" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#arrow-accent)"/>
+      <text x="660" y="522" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">The only download</text>
+    </svg>

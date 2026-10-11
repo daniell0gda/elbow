@@ -1,0 +1,24 @@
+{
+  "title": "Where the coupling is",
+  "kind": "flow",
+  "nodes": [
+    {"id": "form_status", "label": "Form-status (error.playFocusPulse?.())", "shape": "client"},
+    {"id": "error_aggregation", "label": "Error aggregation (ControlError.playFocusPulse)", "shape": "service"},
+    {"id": "aggregate_errors", "label": "Aggregate-errors (decides what pulses)", "shape": "service"},
+    {"id": "form_field", "label": "Form field (playFocusPulse())", "shape": "client"},
+    {"id": "pulse_function", "label": "Pulse function (forms/focus-pulse.ts)", "shape": "service"},
+    {"id": "pulse_styles", "label": "Pulse styles (forms/focus-pulse.less)", "shape": "database"},
+    {"id": "base_styles", "label": "Base global styles (styles.less · app imports)", "shape": "external"}
+  ],
+  "edges": [
+    {"source": "form_status", "target": "error_aggregation", "label": "errors$", "style": "sync"},
+    {"source": "form_status", "target": "aggregate_errors", "label": "runtime call", "style": "async"},
+    {"source": "aggregate_errors", "target": "error_aggregation", "label": "add control", "style": "sync"},
+    {"source": "aggregate_errors", "target": "form_field", "label": "concrete DI", "style": "sync"},
+    {"source": "form_field", "target": "aggregate_errors", "label": "injector", "style": "async"},
+    {"source": "aggregate_errors", "target": "pulse_function", "label": "parent", "style": "sync"},
+    {"source": "form_field", "target": "pulse_function", "label": "container", "style": "sync"},
+    {"source": "pulse_function", "target": "pulse_styles", "label": "class name", "style": "async"},
+    {"source": "base_styles", "target": "pulse_styles", "label": "@import", "style": "sync"}
+  ]
+}

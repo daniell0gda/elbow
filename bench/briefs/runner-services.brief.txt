@@ -1,0 +1,21 @@
+Title: One issue, from first command to release
+Draw it as a sequence diagram.
+
+Elements (label, kind):
+- Hermes agent (coder · checker) (actor)
+- Runner (Docker socket) (service)
+- Service stack (tetra-db · tetra-api) (service, highlight it)
+- Worker (linux-nodejs:24) (service)
+
+Connections, in order (from -> to: label, kind):
+- Hermes agent (coder · checker) -> Runner (Docker socket): run_project_cmd, call
+- Runner (Docker socket) -> Service stack (tetra-db · tetra-api): network + services, call
+- Runner (Docker socket) -> Service stack (tetra-db · tetra-api): init jobs · once, call
+- Service stack (tetra-db · tetra-api) -> Runner (Docker socket): all healthy, async / reply (dashed)
+- Runner (Docker socket) -> Worker (linux-nodejs:24): worker on net · exec, call
+- Worker (linux-nodejs:24) -> Service stack (tetra-db · tetra-api): tetra-api:8080/api, call
+- Service stack (tetra-db · tetra-api) -> Worker (linux-nodejs:24): json, async / reply (dashed)
+- Worker (linux-nodejs:24) -> Runner (Docker socket): exit 0, async / reply (dashed)
+- Runner (Docker socket) -> Hermes agent (coder · checker): result, call
+- Hermes agent (coder · checker) -> Runner (Docker socket): release, call
+- Runner (Docker socket) -> Service stack (tetra-db · tetra-api): remove stack + net, call

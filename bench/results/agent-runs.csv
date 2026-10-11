@@ -1,0 +1,9 @@
+diagram,kind,method,agent_tokens,tool_uses,duration_ms
+runner-services,sequence,hand-drawn,81179,7,82175
+runner-services,sequence,elbow,47393,4,13307
+focus-coupling,flow,hand-drawn,77948,7,115218
+focus-coupling,flow,elbow,47948,5,16079
+npm-cache,swimlane,hand-drawn,80275,8,112324
+npm-cache,swimlane,elbow,48737,5,15561
+compose-workers,nested,hand-drawn,78677,6,129093
+compose-workers,nested,elbow,52955,11,45713

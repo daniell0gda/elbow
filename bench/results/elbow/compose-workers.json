@@ -1,0 +1,31 @@
+{
+  "title": "One issue workspace",
+  "kind": "nested",
+  "nodes": [
+    {"id": "hermes", "label": "Hermes agent (coder · checker)", "shape": "actor"},
+    {"id": "compose_file", "label": "Compose file (.hermes/services.compose.yaml)", "shape": "note"},
+    {"id": "runner", "label": "app-container-runner (only Docker access)", "shape": "service", "focal": true},
+    {"id": "tetra_api", "label": "tetra-api (prebuilt image)", "shape": "service"},
+    {"id": "tetra_db", "label": "tetra-db (postgres:16)", "shape": "database"},
+    {"id": "worker_default", "label": "Worker · default (npm test · ng serve)", "shape": "service"},
+    {"id": "worker_client_test", "label": "Worker · client.test (cypress run)", "shape": "service"},
+    {"id": "worktree", "label": "Issue worktree (/opt/workspace · same path as Hermes)", "shape": "database"}
+  ],
+  "edges": [
+    {"source": "hermes", "target": "runner", "label": "http /run", "style": "sync"},
+    {"source": "compose_file", "target": "runner", "label": "validated", "style": "data"},
+    {"source": "runner", "target": "tetra_api", "label": "compose up", "style": "sync"},
+    {"source": "runner", "target": "worker_default", "label": "docker exec", "style": "sync"},
+    {"source": "tetra_api", "target": "tetra_db", "label": "sql", "style": "sync"},
+    {"source": "worker_default", "target": "tetra_api", "style": "sync"},
+    {"source": "worker_client_test", "target": "tetra_api", "label": "tetra-api:8080", "style": "sync"},
+    {"source": "worker_default", "target": "worktree", "label": "mount rw", "style": "data"},
+    {"source": "worker_client_test", "target": "worktree", "style": "data"},
+    {"source": "hermes", "target": "worktree", "label": "edits", "style": "data"}
+  ],
+  "groups": [
+    {"id": "network", "label": "Network <ws>_default", "members": ["compose_project", "runner_workers"]},
+    {"id": "compose_project", "label": "Compose project <ws> · repo declares", "members": ["tetra_api", "tetra_db"]},
+    {"id": "runner_workers", "label": "Runner workers · run_project_cmd", "members": ["worker_default", "worker_client_test"]}
+  ]
+}

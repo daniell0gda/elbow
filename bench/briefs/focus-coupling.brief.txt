@@ -1,0 +1,22 @@
+Title: Where the coupling is
+Draw it as a component diagram.
+
+Elements (label, kind):
+- Form-status (error.playFocusPulse?.()) (client)
+- Error aggregation (ControlError.playFocusPulse) (service)
+- Aggregate-errors (decides what pulses) (service)
+- Form field (playFocusPulse()) (client)
+- Pulse function (forms/focus-pulse.ts) (service)
+- Pulse styles (forms/focus-pulse.less) (database)
+- Base global styles (styles.less · app imports) (external)
+
+Connections, in order (from -> to: label, kind):
+- Form-status (error.playFocusPulse?.()) -> Error aggregation (ControlError.playFocusPulse): errors$, call
+- Form-status (error.playFocusPulse?.()) -> Aggregate-errors (decides what pulses): runtime call, async / reply (dashed)
+- Aggregate-errors (decides what pulses) -> Error aggregation (ControlError.playFocusPulse): add control, call
+- Aggregate-errors (decides what pulses) -> Form field (playFocusPulse()): concrete DI, call
+- Form field (playFocusPulse()) -> Aggregate-errors (decides what pulses): injector, async / reply (dashed)
+- Aggregate-errors (decides what pulses) -> Pulse function (forms/focus-pulse.ts): parent, call
+- Form field (playFocusPulse()) -> Pulse function (forms/focus-pulse.ts): container, call
+- Pulse function (forms/focus-pulse.ts) -> Pulse styles (forms/focus-pulse.less): class name, async / reply (dashed)
+- Base global styles (styles.less · app imports) -> Pulse styles (forms/focus-pulse.less): @import, call

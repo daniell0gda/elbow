@@ -1,0 +1,29 @@
+Title: One issue workspace
+Draw it as an architecture diagram with nested network boundaries.
+
+Elements (label, kind):
+- Hermes agent (coder · checker) (actor)
+- Compose file (.hermes/services.compose.yaml) (note)
+- app-container-runner (only Docker access) (service, highlight it)
+- tetra-api (prebuilt image) (service)
+- tetra-db (postgres:16) (database)
+- Worker · default (npm test · ng serve) (service)
+- Worker · client.test (cypress run) (service)
+- Issue worktree (/opt/workspace · same path as Hermes) (database)
+
+Connections, in order (from -> to: label, kind):
+- Hermes agent (coder · checker) -> app-container-runner (only Docker access): http /run, call
+- Compose file (.hermes/services.compose.yaml) -> app-container-runner (only Docker access): validated, data / mount (dashed)
+- app-container-runner (only Docker access) -> tetra-api (prebuilt image): compose up, call
+- app-container-runner (only Docker access) -> Worker · default (npm test · ng serve): docker exec, call
+- tetra-api (prebuilt image) -> tetra-db (postgres:16): sql, call
+- Worker · default (npm test · ng serve) -> tetra-api (prebuilt image): (no label), call
+- Worker · client.test (cypress run) -> tetra-api (prebuilt image): tetra-api:8080, call
+- Worker · default (npm test · ng serve) -> Issue worktree (/opt/workspace · same path as Hermes): mount rw, data / mount (dashed)
+- Worker · client.test (cypress run) -> Issue worktree (/opt/workspace · same path as Hermes): (no label), data / mount (dashed)
+- Hermes agent (coder · checker) -> Issue worktree (/opt/workspace · same path as Hermes): edits, data / mount (dashed)
+
+Groups (label: members):
+- Network <ws>_default: tetra-api (prebuilt image), tetra-db (postgres:16), Worker · default (npm test · ng serve), Worker · client.test (cypress run)
+- Compose project <ws> · repo declares: tetra-api (prebuilt image), tetra-db (postgres:16)
+- Runner workers · run_project_cmd: Worker · default (npm test · ng serve), Worker · client.test (cypress run)

@@ -1,0 +1,106 @@
+<svg class="diagram" viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="pulse-coupling-title pulse-coupling-desc">
+    <title id="pulse-coupling-title">Focus pulse coupling map</title>
+    <desc id="pulse-coupling-desc">Architecture showing that form-status depends only on the error service and a callback, while the directive depends on the concrete form field component and both reach the pulse styles through a class name in a global stylesheet.</desc>
+    <defs>
+      <marker id="c-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+      <marker id="c-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+    </defs>
+    <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+    <!-- connectors first -->
+    <g fill="none">
+      <path d="M240,140 H292 Q300,140 300,132 V80 Q300,72 308,72 H358" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#c-arrow)"/>
+      <path d="M240,164 H312 Q320,164 320,172 V224 Q320,232 328,232 H358" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#c-arrow)"/>
+      <line x1="460" y1="200" x2="460" y2="106" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#c-arrow)"/>
+      <line x1="560" y1="232" x2="678" y2="232" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#c-arrow-accent)"/>
+      <line x1="680" y1="252" x2="562" y2="252" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#c-arrow)"/>
+      <path d="M480,264 V384 Q480,392 488,392 H518" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#c-arrow)"/>
+      <path d="M760,264 V384 Q760,392 752,392 H722" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#c-arrow)"/>
+      <line x1="620" y1="424" x2="620" y2="486" stroke="#eb6c36" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#c-arrow-accent)"/>
+      <line x1="360" y1="520" x2="518" y2="520" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#c-arrow)"/>
+    </g>
+
+    <!-- connector labels -->
+    <g font-family="'Geist Mono', monospace" font-size="8" letter-spacing="0.06em" text-anchor="middle" fill="#7a8399">
+      <rect x="248" y="100" width="44" height="12" rx="2" fill="#f5f5f5"/><text x="270" y="109">ERRORS$</text>
+      <rect x="248" y="192" width="64" height="12" rx="2" fill="#f5f5f5"/><text x="280" y="201">RUNTIME CALL</text>
+      <rect x="470" y="146" width="64" height="12" rx="2" fill="#f5f5f5"/><text x="502" y="155">ADD CONTROL</text>
+      <rect x="590" y="212" width="60" height="12" rx="2" fill="#f5f5f5"/><text x="620" y="221" fill="#eb6c36">CONCRETE DI</text>
+      <rect x="596" y="260" width="48" height="12" rx="2" fill="#f5f5f5"/><text x="620" y="269">INJECTOR</text>
+      <rect x="420" y="318" width="52" height="12" rx="2" fill="#f5f5f5"/><text x="446" y="327">PARENT</text>
+      <rect x="772" y="318" width="52" height="12" rx="2" fill="#f5f5f5"/><text x="798" y="327">CONTAINER</text>
+      <rect x="630" y="449" width="56" height="12" rx="2" fill="#f5f5f5"/><text x="658" y="458" fill="#eb6c36">CLASS NAME</text>
+      <rect x="416" y="500" width="48" height="12" rx="2" fill="#f5f5f5"/><text x="440" y="509">@IMPORT</text>
+    </g>
+
+    <!-- nodes -->
+    <g font-family="'Geist', sans-serif" text-anchor="middle">
+      <!-- A form-status -->
+      <rect x="40" y="120" width="200" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="40" y="120" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="48" y="126" width="32" height="12" rx="2" fill="none" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+      <text x="64" y="135" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.08em">COMP</text>
+      <text x="140" y="156" fill="#2d3142" font-size="12" font-weight="600">Form-status</text>
+      <text x="140" y="172" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">error.playFocusPulse?.()</text>
+
+      <!-- B service -->
+      <rect x="360" y="40" width="200" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="360" y="40" width="200" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+      <rect x="368" y="46" width="28" height="12" rx="2" fill="none" stroke="rgba(79,93,117,0.40)" stroke-width="0.8"/>
+      <text x="382" y="55" fill="rgba(79,93,117,0.8)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.08em">SVC</text>
+      <text x="460" y="76" fill="#2d3142" font-size="12" font-weight="600">Error aggregation</text>
+      <text x="460" y="92" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ControlError.playFocusPulse</text>
+
+      <!-- C directive -->
+      <rect x="360" y="200" width="200" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="360" y="200" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="368" y="206" width="28" height="12" rx="2" fill="none" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+      <text x="382" y="215" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.08em">DIR</text>
+      <text x="460" y="236" fill="#2d3142" font-size="12" font-weight="600">Aggregate-errors</text>
+      <text x="460" y="252" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">decides what pulses</text>
+
+      <!-- D form field -->
+      <rect x="680" y="200" width="200" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="680" y="200" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="688" y="206" width="32" height="12" rx="2" fill="none" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+      <text x="704" y="215" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.08em">COMP</text>
+      <text x="780" y="236" fill="#2d3142" font-size="12" font-weight="600">Form field</text>
+      <text x="780" y="252" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">playFocusPulse()</text>
+
+      <!-- E pulse function -->
+      <rect x="520" y="360" width="200" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="520" y="360" width="200" height="64" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+      <rect x="528" y="366" width="24" height="12" rx="2" fill="none" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+      <text x="540" y="375" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.08em">FN</text>
+      <text x="620" y="396" fill="#2d3142" font-size="12" font-weight="600">Pulse function</text>
+      <text x="620" y="412" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">forms/focus-pulse.ts</text>
+
+      <!-- F pulse styles -->
+      <rect x="520" y="488" width="200" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="520" y="488" width="200" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75" stroke-width="1"/>
+      <rect x="528" y="494" width="28" height="12" rx="2" fill="none" stroke="rgba(79,93,117,0.40)" stroke-width="0.8"/>
+      <text x="542" y="503" fill="rgba(79,93,117,0.8)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.08em">CSS</text>
+      <text x="620" y="524" fill="#2d3142" font-size="12" font-weight="600">Pulse styles</text>
+      <text x="620" y="540" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">forms/focus-pulse.less</text>
+
+      <!-- G global styles -->
+      <rect x="160" y="488" width="200" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="160" y="488" width="200" height="64" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+      <rect x="168" y="494" width="40" height="12" rx="2" fill="none" stroke="rgba(45,49,66,0.30)" stroke-width="0.8"/>
+      <text x="188" y="503" fill="rgba(45,49,66,0.7)" font-size="7" font-family="'Geist Mono', monospace" letter-spacing="0.08em">GLOBAL</text>
+      <text x="260" y="524" fill="#2d3142" font-size="12" font-weight="600">Base global styles</text>
+      <text x="260" y="540" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">styles.less · app imports</text>
+    </g>
+
+    <!-- legend -->
+    <line x1="30" y1="580" x2="970" y2="580" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+    <g font-family="'Geist Mono', monospace" font-size="8" fill="#4f5d75" letter-spacing="0.06em">
+      <text x="30" y="604" letter-spacing="0.14em">LEGEND</text>
+      <line x1="110" y1="601" x2="150" y2="601" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#c-arrow)"/>
+      <text x="158" y="604">STATIC DEPENDENCY</text>
+      <line x1="290" y1="601" x2="330" y2="601" stroke="#4f5d75" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#c-arrow)"/>
+      <text x="338" y="604">RUNTIME / IMPLICIT CONTRACT</text>
+      <line x1="510" y1="601" x2="550" y2="601" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#c-arrow-accent)"/>
+      <text x="558" y="604">COUPLING THAT LIMITS YOU</text>
+    </g>
+  </svg>

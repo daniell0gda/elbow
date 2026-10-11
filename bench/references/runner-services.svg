@@ -1,0 +1,118 @@
+<svg viewBox="0 0 1000 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="runner-services-title runner-services-desc">
+        <title id="runner-services-title">Runner-managed services for one issue workspace</title>
+        <desc id="runner-services-desc">Sequence showing the runner creating a workspace network and service stack with init jobs on the first command, a worker on that network calling the API by name, and release removing the stack.</desc>
+        <defs>
+          <marker id="s-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/>
+          </marker>
+          <marker id="s-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/>
+          </marker>
+          <marker id="s-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/>
+          </marker>
+        </defs>
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+
+        <!-- LIFELINES: 100 agent, 340 runner, 580 services, 820 worker -->
+        <line x1="100" y1="80" x2="100" y2="600" stroke="rgba(45,49,66,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="340" y1="80" x2="340" y2="600" stroke="rgba(45,49,66,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="580" y1="80" x2="580" y2="600" stroke="rgba(45,49,66,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="820" y1="80" x2="820" y2="600" stroke="rgba(45,49,66,0.22)" stroke-width="1" stroke-dasharray="3,3"/>
+
+        <!-- OPT FRAME: first command for the workspace -->
+        <rect x="320" y="136" width="284" height="140" rx="4" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+        <rect x="320" y="136" width="40" height="16" rx="2" fill="#f5f5f5" stroke="rgba(45,49,66,0.22)" stroke-width="1"/>
+        <text x="340" y="148" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.12em">OPT</text>
+        <text x="368" y="148" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.04em">[first command for the workspace]</text>
+
+        <!-- ACTIVATION BARS -->
+        <rect x="96" y="116" width="8" height="360" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="96" y="524" width="8" height="48" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="336" y="116" width="8" height="360" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="336" y="524" width="8" height="48" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="576" y="188" width="8" height="72" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="576" y="348" width="8" height="48" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="576" y="564" width="8" height="16" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <rect x="816" y="308" width="8" height="128" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+
+        <!-- MESSAGES -->
+        <line x1="104" y1="120" x2="336" y2="120" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#s-arrow-link)"/>
+        <line x1="344" y1="192" x2="576" y2="192" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#s-arrow)"/>
+        <line x1="344" y1="224" x2="576" y2="224" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#s-arrow)"/>
+        <line x1="576" y1="256" x2="344" y2="256" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#s-arrow)"/>
+        <line x1="344" y1="312" x2="816" y2="312" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#s-arrow)"/>
+        <line x1="816" y1="352" x2="584" y2="352" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#s-arrow-link)"/>
+        <line x1="584" y1="392" x2="816" y2="392" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#s-arrow)"/>
+        <line x1="816" y1="432" x2="344" y2="432" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#s-arrow)"/>
+        <line x1="336" y1="472" x2="104" y2="472" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#s-arrow-accent)"/>
+        <line x1="104" y1="528" x2="336" y2="528" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#s-arrow-link)"/>
+        <line x1="344" y1="568" x2="576" y2="568" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#s-arrow)"/>
+
+        <!-- LABELS -->
+        <rect x="178" y="100" width="84" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="220" y="109" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">RUN_PROJECT_CMD</text>
+        <rect x="408" y="172" width="104" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="460" y="181" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">NETWORK + SERVICES</text>
+        <rect x="412" y="204" width="96" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="460" y="213" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">INIT JOBS · ONCE</text>
+        <rect x="420" y="236" width="80" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="460" y="245" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">ALL HEALTHY</text>
+        <rect x="644" y="292" width="112" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="700" y="301" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">WORKER ON NET · EXEC</text>
+        <rect x="636" y="332" width="128" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="700" y="341" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">TETRA-API:8080/API</text>
+        <rect x="680" y="372" width="40" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="700" y="381" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">JSON</text>
+        <rect x="676" y="412" width="48" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="700" y="421" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">EXIT 0</text>
+        <rect x="192" y="452" width="56" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="220" y="461" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">RESULT</text>
+        <rect x="188" y="508" width="64" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="220" y="517" fill="#2e5aa8" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">RELEASE</text>
+        <rect x="408" y="548" width="104" height="12" rx="2" fill="#f5f5f5"/>
+        <text x="460" y="557" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">REMOVE STACK + NET</text>
+
+        <!-- ACTORS -->
+        <rect x="28" y="24" width="144" height="56" rx="6" fill="#f5f5f5"/>
+        <rect x="28" y="24" width="144" height="56" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399" stroke-width="1"/>
+        <rect x="36" y="32" width="28" height="12" rx="2" fill="transparent" stroke="rgba(122,131,153,0.40)" stroke-width="0.8"/>
+        <text x="50" y="41" fill="#7a8399" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">AGT</text>
+        <text x="100" y="56" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Hermes agent</text>
+        <text x="100" y="71" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">coder · checker</text>
+
+        <rect x="268" y="24" width="144" height="56" rx="6" fill="#f5f5f5"/>
+        <rect x="268" y="24" width="144" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="276" y="32" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="290" y="41" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">API</text>
+        <text x="340" y="56" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Runner</text>
+        <text x="340" y="71" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">Docker socket</text>
+
+        <rect x="508" y="24" width="144" height="56" rx="6" fill="#f5f5f5"/>
+        <rect x="508" y="24" width="144" height="56" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36" stroke-width="1"/>
+        <rect x="516" y="32" width="28" height="12" rx="2" fill="transparent" stroke="rgba(235,108,54,0.50)" stroke-width="0.8"/>
+        <text x="530" y="41" fill="#eb6c36" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">NEW</text>
+        <text x="580" y="56" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Service stack</text>
+        <text x="580" y="71" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">tetra-db · tetra-api</text>
+
+        <rect x="748" y="24" width="144" height="56" rx="6" fill="#f5f5f5"/>
+        <rect x="748" y="24" width="144" height="56" rx="6" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+        <rect x="756" y="32" width="28" height="12" rx="2" fill="transparent" stroke="rgba(45,49,66,0.40)" stroke-width="0.8"/>
+        <text x="770" y="41" fill="rgba(45,49,66,0.8)" font-size="7" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.08em">WKR</text>
+        <text x="820" y="56" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif" text-anchor="middle">Worker</text>
+        <text x="820" y="71" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace" text-anchor="middle">linux-nodejs:24</text>
+
+        <!-- LEGEND -->
+        <line x1="28" y1="616" x2="972" y2="616" stroke="rgba(45,49,66,0.10)" stroke-width="0.8"/>
+        <text x="28" y="632" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.18em">LEGEND</text>
+        <rect x="28" y="644" width="4" height="16" fill="rgba(45,49,66,0.06)" stroke="#4f5d75" stroke-width="0.8"/>
+        <text x="40" y="655" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Busy</text>
+        <line x1="92" y1="652" x2="120" y2="652" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#s-arrow-link)"/>
+        <text x="128" y="655" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">HTTP</text>
+        <line x1="188" y1="652" x2="216" y2="652" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#s-arrow)"/>
+        <text x="224" y="655" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Docker API call</text>
+        <line x1="328" y1="652" x2="356" y2="652" stroke="#4f5d75" stroke-width="1.2" stroke-dasharray="5,4" marker-end="url(#s-arrow)"/>
+        <text x="364" y="655" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Return</text>
+        <line x1="432" y1="652" x2="460" y2="652" stroke="#eb6c36" stroke-width="1.4" marker-end="url(#s-arrow-accent)"/>
+        <text x="468" y="655" fill="#4f5d75" font-size="8.5" font-family="'Geist', sans-serif">Command result</text>
+      </svg>

@@ -1,0 +1,23 @@
+{
+  "title": "One issue, from first command to release",
+  "kind": "sequence",
+  "nodes": [
+    {"id": "agent", "label": "Hermes agent (coder · checker)", "shape": "actor"},
+    {"id": "runner", "label": "Runner (Docker socket)", "shape": "service"},
+    {"id": "stack", "label": "Service stack (tetra-db · tetra-api)", "shape": "service", "focal": true},
+    {"id": "worker", "label": "Worker (linux-nodejs:24)", "shape": "service"}
+  ],
+  "edges": [
+    {"source": "agent", "target": "runner", "label": "run_project_cmd", "style": "sync"},
+    {"source": "runner", "target": "stack", "label": "network + services", "style": "sync"},
+    {"source": "runner", "target": "stack", "label": "init jobs · once", "style": "sync"},
+    {"source": "stack", "target": "runner", "label": "all healthy", "style": "async"},
+    {"source": "runner", "target": "worker", "label": "worker on net · exec", "style": "sync"},
+    {"source": "worker", "target": "stack", "label": "tetra-api:8080/api", "style": "sync"},
+    {"source": "stack", "target": "worker", "label": "json", "style": "async"},
+    {"source": "worker", "target": "runner", "label": "exit 0", "style": "async"},
+    {"source": "runner", "target": "agent", "label": "result", "style": "sync"},
+    {"source": "agent", "target": "runner", "label": "release", "style": "sync"},
+    {"source": "runner", "target": "stack", "label": "remove stack + net", "style": "sync"}
+  ]
+}
