@@ -15,6 +15,24 @@ A model chooses the content and a few typed parameters. elbow does all the geome
 
 The example inputs are in [`tests/`](tests).
 
+## Diagram types
+
+Set `kind` to one of these.
+
+| `kind` | Use it for | Layout |
+| --- | --- | --- |
+| `flow` | Steps, services and the connections between them | Layered, left to right, with technical node tags |
+| `sequence` | Messages between actors, in time order | Lifelines with messages |
+| `state` | States and the transitions between them | Layered |
+| `tree` | Hierarchies, such as an org chart | Layered, top down; sync edges drawn as data |
+| `er` | Entities and the relationships between them | Layered |
+| `swimlane` | Steps grouped by owner or team | One lane per group |
+| `nested` | Groups inside groups | Layered |
+| `layers` | A stack of layers, such as an architecture stack | Layered, top down |
+| `dependency` | What depends on what | Layered, with technical node tags |
+
+`--best` can choose another direction when it scores better.
+
 ## Usage
 
 ```powershell
@@ -40,7 +58,7 @@ measures (crossings, bends, unclear labels, area) to stderr.
 }
 ```
 
-- `kind`: `flow`, `sequence`, `state`, `tree`, `er`, `swimlane`, `nested`, `layers`, `dependency`.
+- `kind`: one of the [diagram types](#diagram-types).
 - `shape`: `service`, `database`, `queue`, `cache`, `actor`, `external`, `client`, `state`, `decision`, `note`.
 - `style`: `sync`, `async`, `data`, `transition`, `dependency`.
 - A trailing `(…)` in a node label becomes its sublabel. In a swimlane, groups become lanes.
