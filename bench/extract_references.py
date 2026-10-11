@@ -1,40 +1,36 @@
 """Extracts the hand-drawn diagram-design SVGs that the static benchmark compares against.
 
-Each source page was drawn by an agent with the diagram-design skill (show-me pages and the sketch-eval references
-of transcript-app). The show-me pages are private, so the extracted `<svg>` elements are committed in
-references/; this script records where each one came from and how it was cut out.
+Each source page was drawn by an agent with the diagram-design skill. The pages are private, so the extracted
+`<svg>` elements are committed in references/; this script shows how they were cut out. Each argument maps one
+page to the names of its diagrams, in the order they appear on the page.
 
-usage: python extract_references.py [--app <transcript-app checkout>]
+usage: python extract_references.py <page.html>=<name>[,<name>...] [<page.html>=<name>...]
+example: python extract_references.py runner-app-lifecycle.html=runner-works,runner-breaks login.html=login
 """
-import argparse
 import re
+import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-SHOW_ME_PAGES = {
-    r"P:\hermes\.gen\show-me-runner-app-lifecycle.html": ["runner-works", "runner-breaks"],
-    r"P:\hermes\.gen\show-me-runner-services.html": ["runner-services"],
-    r"P:\gitea\tetra\.gen\show-me-focus-pulse.html": ["focus-click", "focus-coupling"],
-    r"P:\hermes\.gen\show-me-compose-and-workers.html": ["compose-workers"],
-    r"P:\hermes\.gen\show-me-npm-deps-cache.html": ["npm-cache"],
-    r"P:\hermes\.gen\show-me-skill-updates.html": ["skill-updates"],
-}
-SKETCH_EVAL = ["backend", "hiring", "issue", "login", "order", "org"]
 
 
 def svgs(page: Path) -> list[str]:
     return re.findall(r"(?s)<svg.*?</svg>", page.read_text(encoding="utf-8"))
 
 
+def parse(argument: str) -> tuple[Path, list[str]]:
+    page, separator, names = argument.rpartition("=")
+    if not separator or not page or not names:
+        raise SystemExit(f"expected <page.html>=<name>[,<name>...], got {argument!r}")
+    return Path(page), names.split(",")
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--app", type=Path, default=HERE.parents[1] / "transcript-app")
-    args = parser.parse_args()
+    if len(sys.argv) < 2:
+        raise SystemExit(__doc__)
     out = HERE / "references"
     out.mkdir(exist_ok=True)
-    pages = {Path(page): names for page, names in SHOW_ME_PAGES.items()}
-    pages.update({args.app / ".claude" / "skills" / "sketch-eval" / "references" / f"{name}.html": [name] for name in SKETCH_EVAL})
-    for page, names in pages.items():
+    for page, names in map(parse, sys.argv[1:]):
         for name, svg in zip(names, svgs(page)):
             (out / f"{name}.svg").write_text(svg, encoding="utf-8")
             print(f"{name}.svg  <- {page}")

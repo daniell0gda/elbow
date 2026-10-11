@@ -1,31 +1,31 @@
 ---
 name: elbow-release
-description: Releases elbow - moves the commits from transcript-app\elbow (where elbow is developed) into this repo with library-facing messages, updates the readme and previews, bumps the version in both trees, tags vX.Y.Z so CI builds the release, writes the release notes and reinstalls the local elbow binary. Use when the user asks to release, publish or sync elbow, or to make an elbow change from the app available here.
+description: Releases elbow - moves the commits from the source repo (the repo whose elbow/ folder is where elbow is developed) into this repo with library-facing messages, updates the readme and previews, bumps the version in both trees, tags vX.Y.Z so CI builds the release, writes the release notes and reinstalls the local elbow binary. Use when the user asks to release, publish or sync elbow.
 ---
 
 # Release elbow
 
-elbow is developed in the `elbow\` folder of transcript-app, by default the sibling folder `..\transcript-app`.
-This repo is the published copy: the same code plus `README.md`, `AGENTS.md`, `LICENSE`, `docs/previews/`,
-`skills/` (the `elbow-diagram` agent skill), `bench/` (the benchmark data), `.claude/` and `.github/workflows/release.yml`. A `v*` tag makes CI test, build the Linux binary, create the GitHub release, and
-then build and upload the Windows binary.
+elbow is developed in the `elbow\` folder of another repository, the source repo. This repo is the published
+copy: the same code plus `README.md`, `AGENTS.md`, `LICENSE`, `docs/previews/`, `skills/` (the `elbow-diagram`
+agent skill), `bench/` (the benchmark data), `.claude/` and `.github/workflows/release.yml`. A `v*` tag makes CI
+test, build the Linux binary, create the GitHub release, and then build and upload the Windows binary.
 
-Run every command from this repo's root.
+Run every command from this repo's root. Pass the source repo checkout with `-Source <path>`, or set the
+`ELBOW_SOURCE` environment variable to it.
 
 ## Quick start
 
 ```powershell
-& .claude\skills\elbow-release\scripts\sync-status.ps1
+& .claude\skills\elbow-release\scripts\sync-status.ps1 -Source <source repo>
 ```
 
-It prints the last synced app commit, the unsynced ones, both versions, the latest tag and uncommitted files, and
-exports the unsynced commits as patches into `.gen\elbow-release\patches`. `-AppRepo <path>` points it at
-another transcript-app clone.
+It prints the last synced source commit, the unsynced ones, both versions, the latest tag and uncommitted files,
+and exports the unsynced commits as patches into `.gen\elbow-release\patches`.
 
 ## Workflow
 
-1. Run `sync-status.ps1`. Commit or stash uncommitted work in the app's `elbow\` folder first: patches carry only
-   committed changes.
+1. Run `sync-status.ps1`. Commit or stash uncommitted work in the source repo's `elbow\` folder first: patches
+   carry only committed changes.
 2. Apply each patch in order and commit it with a library-facing message (see **Rules**):
 
    ```powershell
@@ -39,12 +39,13 @@ another transcript-app clone.
 3. Build: `& .claude\skills\elbow-release\scripts\test-build.ps1`. It runs the tests and the release build with
    `vcvars64`. Every test must pass.
 4. Update the docs when users can see the change: the kind table and input fields in `README.md`, the kinds,
-   view fields and parameters in `skills/elbow-diagram/` (agents draw from it), and the previews (`target\release\elbow.exe tests\<name>.json --best --out docs\previews\<name>.svg`). Look at a new
-   preview before adding it. Commit as `docs: ...`.
+   view fields and parameters in `skills/elbow-diagram/` (agents draw from it), and the previews
+   (`target\release\elbow.exe tests\<name>.json --best --out docs\previews\<name>.svg`). Look at a new preview
+   before adding it. Commit as `docs: ...`.
 5. Choose the version with the user: `feat` commits raise the minor version (0.2.0 -> 0.3.0), only `fix` commits
    raise the patch. Set it in `Cargo.toml` and run `test-build.ps1` again: it refreshes `Cargo.lock`, and CI
    builds with `--locked`, so a stale lock fails the release. Commit both files as `chore: release X.Y.Z`.
-6. Copy `Cargo.toml` and `Cargo.lock` into the app's `elbow\` folder and commit them there as
+6. Copy `Cargo.toml` and `Cargo.lock` into the source repo's `elbow\` folder and commit them there as
    `chore(elbow): match the released elbow X.Y.Z`. Run `sync-status.ps1`: it must say `in sync`.
 7. Ask the user before you push, then push `main`, create and push the tag, and wait for the run:
 
@@ -64,11 +65,12 @@ another transcript-app clone.
 ## Rules
 
 - elbow is a library: write each commit message for its users, because the release notes come from them. Say
-  what changes in the drawing or the input, never app terms (sketch, Jev, drawer, window, talk) and never internal
+  what changes in the drawing or the input. Never use terms that only the source repo knows, and never internal
   names. Example: `fix: keep sequence participants in the order they were named`.
+- Never name the source repo in this repo: not in files, commit messages or release notes.
 - No `Co-Authored-By`, `Claude-Session` or other attribution lines in commits or release notes.
 - Never move a tag or force-push: a published tag is final. Fix a bad release with the next patch version.
-- Do not push transcript-app as part of a release unless the user asks.
+- Do not push the source repo as part of a release unless the user asks.
 
 ## Release notes template
 

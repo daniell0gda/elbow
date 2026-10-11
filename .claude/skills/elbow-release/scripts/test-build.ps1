@@ -1,6 +1,6 @@
 # Runs elbow's tests and release build with the MSVC linker environment (cargo needs vcvars64 on Windows).
 # Also refreshes Cargo.lock after a version bump, which the release CI needs for --locked.
-# Usage (from the repo root):  & .claude\skills\elbow-release\scripts\test-build.ps1 [-Repo ..\transcript-app\elbow]
+# Usage (from the repo root):  & .claude\skills\elbow-release\scripts\test-build.ps1 [-Repo <source repo>\elbow]
 param([string]$Repo)
 $ErrorActionPreference = 'Stop'
 if (-not $Repo) { $Repo = Join-Path $PSScriptRoot '..\..\..\..' }

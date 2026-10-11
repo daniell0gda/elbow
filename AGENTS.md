@@ -11,6 +11,6 @@ folder.
 ## Working on elbow
 
 - Test with `cargo test --release`; every reference view in `tests/` must render without a rule violation.
-- The code is developed in the `elbow/` folder of transcript-app and synced here. Make code changes there;
-  this repo adds only the readme, the license, `bench/`, `docs/`, `skills/`, `.claude/` and the release workflow.
+- The code is developed in the `elbow/` folder of a separate source repository and synced here, so do not
+  change `src/`, `tests/`, `examples/` or `Cargo.*` in this repo directly. This repo adds only the readme, the license, `bench/`, `docs/`, `skills/`, `.claude/` and the release workflow.
 - Releases follow [.claude/skills/elbow-release/SKILL.md](.claude/skills/elbow-release/SKILL.md).
