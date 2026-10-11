@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..\..\..\..')).Path
 if (-not $AppRepo) { $AppRepo = Join-Path (Split-Path $root -Parent) 'transcript-app' }
 $AppRepo = (Resolve-Path $AppRepo).Path
-$repoOnly = '^(README\.md|LICENSE|\.gitignore|\.github/|\.claude/|docs/)'
+$repoOnly = '^(README\.md|AGENTS\.md|LICENSE|\.gitignore|\.github/|\.claude/|docs/|skills/)'
 $patches = Join-Path $root '.gen\elbow-release\patches'
 
 function Get-Blobs([string]$repo, [string]$rev, [string]$prefix) {

@@ -6,8 +6,8 @@ description: Releases elbow - moves the commits from transcript-app\elbow (where
 # Release elbow
 
 elbow is developed in the `elbow\` folder of transcript-app, by default the sibling folder `..\transcript-app`.
-This repo is the published copy: the same code plus `README.md`, `LICENSE`, `docs/previews/`, `.claude/` and
-`.github/workflows/release.yml`. A `v*` tag makes CI test, build the Linux binary and create the GitHub release.
+This repo is the published copy: the same code plus `README.md`, `AGENTS.md`, `LICENSE`, `docs/previews/`,
+`skills/` (the `elbow-diagram` agent skill), `.claude/` and `.github/workflows/release.yml`. A `v*` tag makes CI test, build the Linux binary and create the GitHub release.
 
 Run every command from this repo's root.
 
@@ -37,8 +37,8 @@ another transcript-app clone.
    Skip a patch that only bumps the version; step 5 does that. Run `sync-status.ps1` again: it must say `in sync`.
 3. Build: `& .claude\skills\elbow-release\scripts\test-build.ps1`. It runs the tests and the release build with
    `vcvars64`. Every test must pass.
-4. Update the docs when users can see the change: the kind table and input fields in `README.md`, and the
-   previews (`target\release\elbow.exe tests\<name>.json --best --out docs\previews\<name>.svg`). Look at a new
+4. Update the docs when users can see the change: the kind table and input fields in `README.md`, the kinds,
+   view fields and parameters in `skills/elbow-diagram/` (agents draw from it), and the previews (`target\release\elbow.exe tests\<name>.json --best --out docs\previews\<name>.svg`). Look at a new
    preview before adding it. Commit as `docs: ...`.
 5. Choose the version with the user: `feat` commits raise the minor version (0.2.0 -> 0.3.0), only `fix` commits
    raise the patch. Set it in `Cargo.toml` and run `test-build.ps1` again: it refreshes `Cargo.lock`, and CI
