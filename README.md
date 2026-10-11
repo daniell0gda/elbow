@@ -5,6 +5,16 @@ elbows, masked labels, bridges where lines cross, and a legend. The six connecto
 
 A model chooses the content and a few typed parameters. elbow does all the geometry in about 1 ms.
 
+## Previews
+
+| Sequence | Flow |
+| --- | --- |
+| ![Login sequence](docs/previews/login.svg) | ![Backend flow](docs/previews/backend.svg) |
+| **State** | **Tree** |
+| ![Order state machine](docs/previews/order.svg) | ![Org tree](docs/previews/org.svg) |
+
+The example inputs are in [`tests/`](tests).
+
 ## Usage
 
 ```powershell
@@ -47,3 +57,7 @@ measures (crossings, bends, unclear labels, area) to stderr.
 cargo test --release
 cargo run --release --example stress 500 --best
 ```
+
+## Credits
+
+The editorial look follows the [diagram-design](https://github.com/cathrynlavery/diagram-design) skill by Cathryn Lavery. Credit for the visual style goes to that project.
