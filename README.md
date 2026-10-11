@@ -91,6 +91,13 @@ measures (crossings, bends, unclear labels, area) to stderr.
 `direction` (`right`, `down`), `node_gap`, `min_channel`, `track_gap`, `uniform_rank_size`, `ordering_sweeps`,
 `theme` (`light`, `dark`), `legend`.
 
+## Use with an AI agent
+
+[`skills/elbow-diagram`](skills/elbow-diagram/SKILL.md) is an Agent Skill that teaches an agent to draw with
+elbow: which kind to pick, how to write the view and its label conventions, how to read the report, and a script
+that puts several diagrams on one page. Copy the folder into your agent's skills folder, or point the agent at
+its `SKILL.md`. Agents working in this repo start from [AGENTS.md](AGENTS.md).
+
 ## Tests
 
 ```powershell
