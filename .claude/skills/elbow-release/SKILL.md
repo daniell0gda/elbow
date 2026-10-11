@@ -7,7 +7,7 @@ description: Releases elbow - moves the commits from transcript-app\elbow (where
 
 elbow is developed in the `elbow\` folder of transcript-app, by default the sibling folder `..\transcript-app`.
 This repo is the published copy: the same code plus `README.md`, `AGENTS.md`, `LICENSE`, `docs/previews/`,
-`skills/` (the `elbow-diagram` agent skill), `.claude/` and `.github/workflows/release.yml`. A `v*` tag makes CI test, build the Linux binary, create the GitHub release, and
+`skills/` (the `elbow-diagram` agent skill), `bench/` (the benchmark data), `.claude/` and `.github/workflows/release.yml`. A `v*` tag makes CI test, build the Linux binary, create the GitHub release, and
 then build and upload the Windows binary.
 
 Run every command from this repo's root.
