@@ -12,14 +12,14 @@ Windows binary. Run every command from this repo's root.
 
 1. See what the release holds: `rtk git status`, `rtk git describe --tags --abbrev=0` for the last tag, and
    `rtk git log --oneline <last tag>..HEAD`. Commit or stash uncommitted work first.
-2. Build: `& .claude\skills\elbow-release\scripts\test-build.ps1`. It runs the tests and the release build with
-   `vcvars64`. Every test must pass.
+2. Build: `python3 .claude/skills/elbow-release/scripts/test-build.py`. It runs the tests and the release build
+   (with `vcvars64` on Windows). Every test must pass.
 3. Update the docs when users can see the change: the kind table and input fields in `README.md`, the kinds,
    view fields and parameters in `skills/elbow-diagram/` (agents draw from it), and the previews
-   (`target\release\elbow.exe tests\<name>.json --best --out docs\previews\<name>.svg`). Look at a new preview
+   (`target/release/elbow tests/<name>.json --best --out docs/previews/<name>.svg`). Look at a new preview
    before adding it. Commit as `docs: ...`.
 4. Choose the version with the user: `feat` commits raise the minor version (0.2.0 -> 0.3.0), only `fix` commits
-   raise the patch. Set it in `Cargo.toml` and run `test-build.ps1` again: it refreshes `Cargo.lock`, and CI
+   raise the patch. Set it in `Cargo.toml` and run `test-build.py` again: it refreshes `Cargo.lock`, and CI
    builds with `--locked`, so a stale lock fails the release. Commit both files as `chore: release X.Y.Z`.
 5. Ask the user before you push, then push `main`, create and push the tag, and wait for the run:
 
@@ -33,8 +33,8 @@ Windows binary. Run every command from this repo's root.
 
 6. CI writes only a changelog link. Write the notes from the template below into a scratch file and set them:
    `rtk gh release edit vX.Y.Z --notes-file <file>`.
-7. Reinstall the local binary that other tools on this machine use. It needs `vcvars64`, like
-   `test-build.ps1`: `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked --force`.
+7. Reinstall the local binary that other tools on this machine use. On Windows it needs `vcvars64`, like
+   `test-build.py`: `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked --force`.
 
 ## Rules
 
@@ -66,4 +66,4 @@ Check the resvg version against `RESVG_VERSION` in `.github/workflows/release.ym
 
 ## Files
 
-- `scripts/test-build.ps1`: `cargo test` and `cargo build --release` with `vcvars64`.
+- `scripts/test-build.py`: `cargo test` and `cargo build --release`, with `vcvars64` on Windows.
