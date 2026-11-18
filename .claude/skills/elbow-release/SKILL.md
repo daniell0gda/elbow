@@ -6,14 +6,16 @@ description: Releases elbow - checks what changed since the last tag, runs the t
 # Release elbow
 
 A `v*` tag makes CI test, build the Linux binary, create the GitHub release, and then build and upload the
-Windows binary. Run every command from this repo's root.
+Windows binary. Run every command from this repo's root. On Windows, run the Python script with `py` instead of
+`python3`.
 
 ## Workflow
 
 1. See what the release holds: `git status`, `git describe --tags --abbrev=0` for the last tag, and
    `git log --oneline <last tag>..HEAD`. Commit or stash uncommitted work first.
 2. Build: `python3 .claude/skills/elbow-release/scripts/test-build.py`. It runs the tests and the release build
-   (with `vcvars64` on Windows). Every test must pass. On a failure it prints the full cargo output.
+   (with `vcvars64` on Windows). Every test must pass. It can take several minutes and prints nothing until cargo
+   stops, so give the command a 10-minute timeout. On a failure it prints the full cargo output.
 3. Update the docs when users can see the change: the kind table and input fields in `README.md`, the kinds,
    view fields and parameters in `skills/elbow-diagram/` (agents draw from it), and the previews
    (`target/release/elbow tests/<name>.json --best --out docs/previews/<name>.svg`). Look at a new preview
@@ -33,7 +35,7 @@ Windows binary. Run every command from this repo's root.
 
 6. CI writes only a changelog link. Write the notes from the template below into a scratch file and set them:
    `gh release edit vX.Y.Z --notes-file <file>`.
-7. Reinstall the local binary that other tools on this machine use:
+7. Reinstall the local binary that other tools on this machine use, with a 10-minute timeout:
    `python3 .claude/skills/elbow-release/scripts/test-build.py --install vX.Y.Z`. It runs
    `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked --force` (with `vcvars64` on
    Windows).
