@@ -13,7 +13,7 @@ Windows binary. Run every command from this repo's root.
 1. See what the release holds: `git status`, `git describe --tags --abbrev=0` for the last tag, and
    `git log --oneline <last tag>..HEAD`. Commit or stash uncommitted work first.
 2. Build: `python3 .claude/skills/elbow-release/scripts/test-build.py`. It runs the tests and the release build
-   (with `vcvars64` on Windows). Every test must pass.
+   (with `vcvars64` on Windows). Every test must pass. On a failure it prints the full cargo output.
 3. Update the docs when users can see the change: the kind table and input fields in `README.md`, the kinds,
    view fields and parameters in `skills/elbow-diagram/` (agents draw from it), and the previews
    (`target/release/elbow tests/<name>.json --best --out docs/previews/<name>.svg`). Look at a new preview
@@ -33,8 +33,10 @@ Windows binary. Run every command from this repo's root.
 
 6. CI writes only a changelog link. Write the notes from the template below into a scratch file and set them:
    `gh release edit vX.Y.Z --notes-file <file>`.
-7. Reinstall the local binary that other tools on this machine use. On Windows it needs `vcvars64`, like
-   `test-build.py`: `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked --force`.
+7. Reinstall the local binary that other tools on this machine use:
+   `python3 .claude/skills/elbow-release/scripts/test-build.py --install vX.Y.Z`. It runs
+   `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked --force` (with `vcvars64` on
+   Windows).
 
 ## Rules
 
@@ -66,4 +68,5 @@ Check the resvg version against `RESVG_VERSION` in `.github/workflows/release.ym
 
 ## Files
 
-- `scripts/test-build.py`: `cargo test` and `cargo build --release`, with `vcvars64` on Windows.
+- `scripts/test-build.py`: `cargo test` and `cargo build --release`, or `cargo install` with `--install <tag>`,
+  with `vcvars64` on Windows.
