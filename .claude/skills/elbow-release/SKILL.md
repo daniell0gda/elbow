@@ -10,8 +10,8 @@ Windows binary. Run every command from this repo's root.
 
 ## Workflow
 
-1. See what the release holds: `rtk git status`, `rtk git describe --tags --abbrev=0` for the last tag, and
-   `rtk git log --oneline <last tag>..HEAD`. Commit or stash uncommitted work first.
+1. See what the release holds: `git status`, `git describe --tags --abbrev=0` for the last tag, and
+   `git log --oneline <last tag>..HEAD`. Commit or stash uncommitted work first.
 2. Build: `python3 .claude/skills/elbow-release/scripts/test-build.py`. It runs the tests and the release build
    (with `vcvars64` on Windows). Every test must pass.
 3. Update the docs when users can see the change: the kind table and input fields in `README.md`, the kinds,
@@ -23,16 +23,16 @@ Windows binary. Run every command from this repo's root.
    builds with `--locked`, so a stale lock fails the release. Commit both files as `chore: release X.Y.Z`.
 5. Ask the user before you push, then push `main`, create and push the tag, and wait for the run:
 
-   ```powershell
-   rtk git push origin main
-   rtk git tag -a vX.Y.Z -m "elbow vX.Y.Z"
-   rtk git push origin vX.Y.Z
-   rtk gh run list --limit 1
-   rtk gh run watch <run id> --exit-status
+   ```bash
+   git push origin main
+   git tag -a vX.Y.Z -m "elbow vX.Y.Z"
+   git push origin vX.Y.Z
+   gh run list --limit 1
+   gh run watch <run id> --exit-status
    ```
 
 6. CI writes only a changelog link. Write the notes from the template below into a scratch file and set them:
-   `rtk gh release edit vX.Y.Z --notes-file <file>`.
+   `gh release edit vX.Y.Z --notes-file <file>`.
 7. Reinstall the local binary that other tools on this machine use. On Windows it needs `vcvars64`, like
    `test-build.py`: `cargo install --git https://github.com/daniell0gda/elbow --tag vX.Y.Z --locked --force`.
 
